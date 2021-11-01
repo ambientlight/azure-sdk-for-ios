@@ -1,0 +1,19 @@
+parameters: 
+  - name: ContainerRegistryClientId
+    type: string
+  - name: ContainerRegistryClientSecret
+    type: string
+  - name: ContainerRegistry
+    type: string
+  - name: ImageName
+    type: string
+  - name: Tag
+    type: string
+    default: 'latest'
+steps:
+- pwsh: |
+    docker login $(containerRegistry) -u "${{ parameters.ContainerRegistryClientId }}" -p "${{ parameters.ContainerRegistryClientSecret }}"
+  displayName: Login container registry
+- pwsh: |
+    docker pull '${{ parameters.ContainerRegistry }}/${{ parameters.ImageName }}:${{ parameters.Tag }}'
+  displayName: Pull docker image ${{ parameters.ImageName }}
