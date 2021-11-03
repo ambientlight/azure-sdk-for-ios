@@ -49,7 +49,7 @@ public struct ErrorAdditionalInfo: Codable, Swift.Error {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try? container.decode(String.self, forKey: .type)
         // self.info = try? container.decode(AnyObject.self, forKey: .info)
-        self.info = nil
+        self.info = try? container.nestedUnkeyedContainer(forKey: .info) as AnyObject
     }
 
     /// Encode a `ErrorAdditionalInfo` structure

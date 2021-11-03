@@ -29,7 +29,7 @@ import AzureCore
 import Foundation
 
 public class GeolocationClient {
-    private let service: Geolocation!
+    private let service: Geolocation
     
     public init(
         endpoint: URL? = nil,

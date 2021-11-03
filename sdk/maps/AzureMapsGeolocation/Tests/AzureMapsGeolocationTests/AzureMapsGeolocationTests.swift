@@ -33,7 +33,7 @@ final class AzureMapsGeolocationTests: XCTestCase {
     func testGetLocation(){
         let client = try! GeolocationClient.init(credential: SharedTokenCredential(""), withOptions: GeolocationClientOptions())
         let expectation = expectation(description: "get location should return")
-        client.getLocation(ipAddress: "140.113.0.0", completionHandler: { result, response in
+        client.getLocation(ipAddress: "140.113.0.0") { result, response in
             switch result {
             case .failure(let error):
                 XCTFail(error.message)
@@ -42,7 +42,7 @@ final class AzureMapsGeolocationTests: XCTestCase {
             }
     
             expectation.fulfill()
-        })
+        }
         
         waitForExpectations(timeout: 10, handler: nil)
     }
