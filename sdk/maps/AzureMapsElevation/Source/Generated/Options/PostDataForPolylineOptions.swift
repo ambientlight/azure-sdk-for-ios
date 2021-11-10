@@ -16,22 +16,22 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `PostDataForPolyline` operation.
-internal struct PostDataForPolylineOptions: RequestOptions {
+public struct PostDataForPolylineOptions: RequestOptions {
     /// The samples parameter specifies the number of equally spaced points at which elevation values  should be provided along a polyline path. The number of samples should range from 2 to 2,000. Default value is 10.
-    internal let samples: Int32?
+    public let samples: Int32?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `PostDataForPolylineOptions` structure.
     /// - Parameters:
@@ -40,7 +40,7 @@ internal struct PostDataForPolylineOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         samples: Int32? = nil,
         clientRequestId: String? = nil,
         cancellationToken: CancellationToken? = nil,

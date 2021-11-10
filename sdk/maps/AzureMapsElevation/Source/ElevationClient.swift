@@ -34,10 +34,10 @@ public class ElevationClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: ElevationClientOptions
-    ) throws {
-        self.service = try ElevationClientInternal(
-            url: nil,
+        options: ElevationClientOptions = ElevationClientOptions()
+    ) {
+        service = try! ElevationClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).elevation
@@ -47,9 +47,46 @@ public class ElevationClient {
         bounds: [Float],
         rows: Int32,
         columns: Int32,
-        withOptions options: GetDataForBoundingBoxOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetDataForBoundingBoxOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<ElevationResult>
     ) {
-        self.service.getDataForBoundingBox(format: .json, bounds: bounds, rows: rows, columns: columns, withOptions: options, completionHandler: completionHandler)
+        service.getDataForBoundingBox(format: format, bounds: bounds, rows: rows, columns: columns, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getDataForPoints(
+        points: [String],
+        format: JsonFormat = .json,
+        options: GetDataForPointsOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ElevationResult>
+    ) {
+        service.getDataForPoints(format: format, points: points, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getDataForPolyline(
+        lines: [String],
+        format: JsonFormat = .json,
+        options: GetDataForPolylineOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ElevationResult>
+    ) {
+        service.getDataForPolyline(format: format, lines: lines, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func postDataForPoints(
+        points: [LatLongPairAbbreviated],
+        format: JsonFormat = .json,
+        options: PostDataForPointsOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ElevationResult>
+    ) {
+        service.post(dataForPoints: points, format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func postDataForPolyline(
+        lines: [LatLongPairAbbreviated],
+        format: JsonFormat = .json,
+        options: PostDataForPolylineOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ElevationResult>
+    ) {
+        service.post(dataForPolyline: lines, format: format, withOptions: options, completionHandler: completionHandler)
     }
 }

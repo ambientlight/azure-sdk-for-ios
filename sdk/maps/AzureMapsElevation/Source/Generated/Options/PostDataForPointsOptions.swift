@@ -16,19 +16,19 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `PostDataForPoints` operation.
-internal struct PostDataForPointsOptions: RequestOptions {
+public struct PostDataForPointsOptions: RequestOptions {
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `PostDataForPointsOptions` structure.
     /// - Parameters:
@@ -36,7 +36,7 @@ internal struct PostDataForPointsOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         clientRequestId: String? = nil,
         cancellationToken: CancellationToken? = nil,
         dispatchQueue: DispatchQueue? = nil,
