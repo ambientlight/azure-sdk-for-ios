@@ -27,13 +27,14 @@
 
 import XCTest
 import Foundation
-@testable import AzureMapsGeolocation
+import AzureMapsGeolocation
 
 final class AzureMapsGeolocationTests: XCTestCase {
-    func testGetLocation(){
-        let client = try! GeolocationClient.init(credential: SharedTokenCredential(""), withOptions: GeolocationClientOptions())
+    func test_getLocation_shouldReturnCorrectCountryRegionISOCode() {
+        let sut = makeSUT()
         let expectation = expectation(description: "get location should return")
-        client.getLocation(ipAddress: "140.113.0.0") { result, response in
+
+        sut.getLocation(ipAddress: "140.113.0.0") { result, _ in
             switch result {
             case .failure(let error):
                 XCTFail(error.message)
@@ -45,5 +46,12 @@ final class AzureMapsGeolocationTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    // MARK: - Helpers
+
+    func makeSUT() -> GeolocationClient {
+        // FIXME: replace with env variables
+        GeolocationClient(credential: SharedTokenCredential("PUT_YOUR_SUBSCRIPTION_KEY_HERE"))
     }
 }
