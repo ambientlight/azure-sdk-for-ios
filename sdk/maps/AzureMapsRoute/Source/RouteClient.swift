@@ -34,10 +34,10 @@ public class RouteClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: RouteClientOptions
-    ) throws {
-        self.service = try RouteClientInternal(
-            url: nil,
+        options: RouteClientOptions = RouteClientOptions()
+    ) {
+        service = try! RouteClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).route
@@ -45,9 +45,81 @@ public class RouteClient {
     
     public func getRouteDirections(
         routePoints: String,
-        withOptions options: GetRouteDirectionsOptions? = nil,
+        format: ResponseFormat = .json,
+        options: GetRouteDirectionsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<RouteDirections>
     ) {
-        self.service.getRouteDirections(format: .json, routePoints: routePoints, withOptions: options, completionHandler: completionHandler)
+        service.getRouteDirections(format: format, routePoints: routePoints, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getRouteDirections(
+        routePoints: String,
+        additionalParameters: RouteDirectionParameters,
+        format: ResponseFormat = .json,
+        options: GetRouteDirectionsWithAdditionalParametersOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteDirections>
+    ) {
+        service.get(routeDirectionsWithAdditionalParameters: additionalParameters, format: format, routePoints: routePoints, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func requestRouteDirectionsBatchSync(
+        request: BatchRequest,
+        format: JsonFormat = .json,
+        options: RequestRouteDirectionsBatchSyncOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteDirectionsBatchResult>
+    ) {
+        service.request(routeDirectionsBatchSync: request, format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func requestRouteDirectionsBatch(
+        request: BatchRequest,
+        format: JsonFormat = .json,
+        options: RequestRouteDirectionsBatchOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteDirectionsBatchResult?>
+    ) {
+        service.request(routeDirectionsBatch: request, format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getRouteDirectionsBatch(
+        batchId: String,
+        options: GetRouteDirectionsBatchOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteDirectionsBatchResult?>
+    ) {
+        service.getRouteDirectionsBatch(batchId: batchId, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getRouteRange(
+        query: [Double],
+        format: ResponseFormat = .json,
+        options: GetRouteRangeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteRangeResult>
+    ) {
+        service.getRouteRange(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func requestRouteMatrixSync(
+        query: RouteMatrixQuery,
+        format: JsonFormat = .json,
+        options: RequestRouteMatrixSyncOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteMatrixResult>
+    ) {
+        service.request(routeMatrixSync: query, format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func requestRouteMatrix(
+        query: RouteMatrixQuery,
+        format: JsonFormat = .json,
+        options: RequestRouteMatrixOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteMatrixResult?>
+    ) {
+        service.request(routeMatrix: query, format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getRouteMatrix(
+        matrixId: String,
+        options: GetRouteMatrixOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<RouteMatrixResult?>
+    ) {
+        service.getRouteMatrix(matrixId: matrixId, withOptions: options, completionHandler: completionHandler)
     }
 }

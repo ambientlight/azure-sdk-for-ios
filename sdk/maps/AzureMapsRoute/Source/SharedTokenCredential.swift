@@ -28,17 +28,17 @@
 import Foundation
 import AzureCore
 
-class SharedTokenCredential: TokenCredential {
+public class SharedTokenCredential: TokenCredential {
     private let token: String
     public init(_ token: String){
         self.token = token
     }
     
-    func token(forScopes scopes: [String], completionHandler: @escaping TokenCompletionHandler) {
+    public func token(forScopes scopes: [String], completionHandler: @escaping TokenCompletionHandler) {
         let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date())!
         let accessToken = AccessToken(token: token, expiresOn: tomorrow)
         completionHandler(accessToken, nil)
     }
     
-    func validate() throws {}
+    public func validate() throws {}
 }
