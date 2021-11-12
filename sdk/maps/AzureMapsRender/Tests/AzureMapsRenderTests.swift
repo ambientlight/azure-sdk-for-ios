@@ -186,13 +186,13 @@ final class AzureMapsRenderTests: XCTestCase {
         case let .failure(error):
             XCTFail(error.message, file: file, line: line)
         case let .success(copyright):
-            XCTAssertNotNil(copyright.generalCopyrights, file: file, line: line)
+            XCTAssertNotNil(copyright.generalCopyrights, "Copyright should have general copyrights", file: file, line: line)
         }
     }
 
     func assertResponseHasImageRepresentableData(_ response: HTTPResponse?, file: StaticString = #file, line: UInt = #line) {
         if let response = response, let data = response.data {
-            XCTAssertNotNil(NSImage(data: data), file: file, line: line)
+            XCTAssertNotNil(NSImage(data: data), "Response data should be image representable", file: file, line: line)
         } else {
             XCTFail("No response or data", file: file, line: line)
         }
