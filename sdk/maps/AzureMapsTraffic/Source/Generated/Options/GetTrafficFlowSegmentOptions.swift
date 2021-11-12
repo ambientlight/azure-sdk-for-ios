@@ -16,26 +16,26 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetTrafficFlowSegment` operation.
-internal struct GetTrafficFlowSegmentOptions: RequestOptions {
+public struct GetTrafficFlowSegmentOptions: RequestOptions {
     /// Unit of speed in KMPH or MPH
-    internal let unit: SpeedUnit?
+    public let unit: SpeedUnit?
     /// The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.
-    internal let thickness: Int32?
+    public let thickness: Int32?
     /// Boolean on whether the response should include OpenLR code
-    internal let openLr: Bool?
+    public let openLr: Bool?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetTrafficFlowSegmentOptions` structure.
     /// - Parameters:
@@ -46,7 +46,7 @@ internal struct GetTrafficFlowSegmentOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         unit: SpeedUnit? = nil,
         thickness: Int32? = nil,
         openLr: Bool? = nil,
