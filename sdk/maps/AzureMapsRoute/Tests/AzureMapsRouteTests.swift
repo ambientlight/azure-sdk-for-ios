@@ -33,7 +33,7 @@ import AzureMapsRoute
 final class AzureMapsRouteTests: XCTestCase {
     func test_getRouteDirections_shouldReturnRouteDirections() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "getRouteDirections should return")
 
         sut.getRouteDirections(routePoints: anyRoutePoints()) { [self] result, _ in
             assertSuccessfulResult(result) { routeDirections in
@@ -50,7 +50,7 @@ final class AzureMapsRouteTests: XCTestCase {
         throw XCTSkip("GeoJsonObject generated without `coordinates` property, so we cannot provide a proper geojson object, thus the request fails.")
 
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "getRouteDirections with additional parameters should return")
 
         sut.getRouteDirections(routePoints: anyRoutePoints(), additionalParameters: anyRouteDirectionsParameters()) { [self] result, _ in
             assertSuccessfulResult(result) { routeDirections in
@@ -65,7 +65,7 @@ final class AzureMapsRouteTests: XCTestCase {
 
     func test_requestRouteDirectionsBatchSync_shouldReturnBatchedRouteDirections() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "requestRouteDirectionsBatchSync should return")
 
         sut.requestRouteDirectionsBatchSync(request: anyBatchRequest()) { [self] result, _ in
             assertSuccessfulResult(result) { routeDirectionsBatchResult in
@@ -80,7 +80,7 @@ final class AzureMapsRouteTests: XCTestCase {
 
     func test_requestRouteDirectionsBatch_withGetRouteDirectionsBatch_shouldReturnBatchedRouteDirections() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "requestRouteDirectionsBatch and getRouteDirectionsBatch should return")
 
         sut.requestRouteDirectionsBatch(request: anyBatchRequest()) { [self] result, response in
             guard let batchId = getBatchIdAndAssertResponseHasIt(response) else {
@@ -103,7 +103,7 @@ final class AzureMapsRouteTests: XCTestCase {
 
     func test_getRouteRange_shouldReturnRouteRange() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "getRouteRange should return")
 
         sut.getRouteRange(query: anyRouteRangeQuery(), options: GetRouteRangeOptions(timeBudgetInSec: 6000)) { [self] result, _ in
             assertSuccessfulResult(result) { routeRangeResult in
@@ -118,7 +118,7 @@ final class AzureMapsRouteTests: XCTestCase {
 
     func test_requestRouteMatrixSync_shouldReturnRouteMatrix() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "requestRouteMatrixSync should return")
 
         sut.requestRouteMatrixSync(query: anyRouteMatrixQuery()) { [self] result, _ in
             assertSuccessfulResult(result) { routeMatrixResult in
@@ -133,7 +133,7 @@ final class AzureMapsRouteTests: XCTestCase {
 
     func test_requestRouteMatrix_withGetRouteMatrix_shouldReturnRouteMatrix() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get route directions should return")
+        let expectation = expectation(description: "requestRouteMatrix and getRouteMatrix should return")
 
         sut.requestRouteMatrix(query: anyRouteMatrixQuery()) { [self] result, response in
             guard let matrixId = getMatrixIdAndAssertResponseHasIt(response) else {
