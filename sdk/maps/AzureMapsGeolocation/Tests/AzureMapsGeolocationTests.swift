@@ -32,7 +32,7 @@ import AzureMapsGeolocation
 final class AzureMapsGeolocationTests: XCTestCase {
     func test_getLocation_shouldReturnCorrectCountryRegionISOCode() {
         let sut = makeSUT()
-        let expectation = expectation(description: "get location should return")
+        let expectation = expectation(description: "getLocation should return")
 
         sut.getLocation(ipAddress: "140.113.0.0") { result, _ in
             switch result {
