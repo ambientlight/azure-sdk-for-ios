@@ -33,7 +33,7 @@ import AzureMapsElevation
 final class AzureMapsElevationTests: XCTestCase {
     func test_getDataForBoundingBox_shouldReturnElevations() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getDataForBoundingBox should return")
 
         sut.getDataForBoundingBox(bounds: anyBounds(), rows: 3, columns: 3) { [self] result, _ in
             assertResultHasElevations(result)
@@ -46,7 +46,7 @@ final class AzureMapsElevationTests: XCTestCase {
 
     func test_getDataForPoints_shouldReturnElevations() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getDataForPoints should return")
 
         sut.getDataForPoints(points: anyPoints()) { [self] result, _ in
             assertResultHasElevations(result)
@@ -59,7 +59,7 @@ final class AzureMapsElevationTests: XCTestCase {
 
     func test_getDataForPolyline_shouldReturnElevations() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getDataForPolyline should return")
 
         sut.getDataForPolyline(lines: anyPolyline()) { [self] result, _ in
             assertResultHasElevations(result)
@@ -72,7 +72,7 @@ final class AzureMapsElevationTests: XCTestCase {
 
     func test_postDataForPoints_shouldReturnElevations() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "postDataForPoints should return")
 
         sut.postDataForPoints(points: anyDataPoints()) { [self] result, _ in
             assertResultHasElevations(result)
@@ -85,7 +85,7 @@ final class AzureMapsElevationTests: XCTestCase {
 
     func test_postDataForPolyline_shouldReturnElevations() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "postDataForPolyline should return")
 
         sut.postDataForPolyline(lines: anyDataPolyline()) { [self] result, _ in
             assertResultHasElevations(result)
