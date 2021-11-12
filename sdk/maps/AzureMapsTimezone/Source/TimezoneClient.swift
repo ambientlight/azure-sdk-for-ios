@@ -34,10 +34,10 @@ public class TimezoneClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: TimezoneClientOptions
-    ) throws {
-        self.service = try TimezoneClientInternal(
-            url: nil,
+        options: TimezoneClientOptions = TimezoneClientOptions()
+    ) {
+        service = try! TimezoneClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).timezone
@@ -45,45 +45,52 @@ public class TimezoneClient {
     
     public func getTimezoneById(
         timezoneId: String,
-        withOptions options: GetTimezoneByIDOptions? = nil, completionHandler: @escaping HTTPResultHandler<TimezoneResult>
+        format: JsonFormat = .json,
+        options: GetTimezoneByIDOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<TimezoneResult>
     ) {
-        self.service.getTimezoneById(format: .json, timezoneId: timezoneId, withOptions: options, completionHandler: completionHandler)
+        service.getTimezoneById(format: format, timezoneId: timezoneId, withOptions: options, completionHandler: completionHandler)
     }
     
     public func getTimezoneByCoordinates(
         coordinates: [Double],
-        withOptions options: GetTimezoneByCoordinatesOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetTimezoneByCoordinatesOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<TimezoneResult>
     ) {
-        self.service.getTimezoneByCoordinates(format: .json, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+        service.getTimezoneByCoordinates(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
     }
     
     public func getWindowsTimezoneIds(
-        withOptions options: GetWindowsTimezoneIdsOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetWindowsTimezoneIdsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[TimezoneWindows]>
     ) {
-        self.service.getWindowsTimezoneIds(format: .json, withOptions: options, completionHandler: completionHandler)
+        service.getWindowsTimezoneIds(format: format, withOptions: options, completionHandler: completionHandler)
     }
     
     public func getIanaTimezoneIds(
-        withOptions options: GetIanaTimezoneIdsOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetIanaTimezoneIdsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[IanaId]>
     ) {
-        self.service.getIanaTimezoneIds(format: .json, withOptions: options, completionHandler: completionHandler)
+        service.getIanaTimezoneIds(format: format, withOptions: options, completionHandler: completionHandler)
     }
     
     public func getIanaVersion(
-        withOptions options: GetIanaVersionOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetIanaVersionOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<TimezoneIanaVersionResult>
     ) {
-        self.service.getIanaVersion(format: .json, withOptions: options, completionHandler: completionHandler)
+        service.getIanaVersion(format: format, withOptions: options, completionHandler: completionHandler)
     }
     
     public func convertWindowsTimezoneToIana(
         windowsTimezoneId: String,
-        withOptions options: ConvertWindowsTimezoneToIanaOptions? = nil,
+        format: JsonFormat = .json,
+        options: ConvertWindowsTimezoneToIanaOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<[IanaId]>
     ) {
-        self.service.convertWindowsTimezoneToIana(format: .json, windowsTimezoneId: windowsTimezoneId, withOptions: options, completionHandler: completionHandler)
+        service.convertWindowsTimezoneToIana(format: format, windowsTimezoneId: windowsTimezoneId, withOptions: options, completionHandler: completionHandler)
     }
 }
