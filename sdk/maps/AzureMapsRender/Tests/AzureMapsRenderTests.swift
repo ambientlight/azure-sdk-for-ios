@@ -33,7 +33,7 @@ import AzureMapsRender
 final class AzureMapsRenderTests: XCTestCase {
     func test_getCopyrightCaption_shouldReturnCopyrightCaption() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getCopyrightCaption should return")
 
         sut.getCopyrightCaption() { [self] result, _ in
             assertSuccessfulResult(result) { copyrightCaption in
@@ -48,7 +48,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getCopyrightForTile_shouldReturnCopyright() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getCopyrightForTile should return")
 
         sut.getCopyrightForTile(tileIndex: anyTileIndex()) { [self] result, _ in
             assertResultHasCopyright(result)
@@ -61,7 +61,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getCopyrightForWorld_shouldReturnCopyright() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getCopyrightForWorld should return")
 
         sut.getCopyrightForWorld() { [self] result, _ in
             assertResultHasCopyright(result)
@@ -74,7 +74,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getCopyrightFromBoundingBox_shouldReturnCopyright() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getCopyrightFromBoundingBox should return")
 
         sut.getCopyrightFromBoundingBox(boundingBox: anyBoundingBox()) { [self] result, _ in
             assertResultHasCopyright(result)
@@ -87,7 +87,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getMapStaticImage_shouldReturnImage() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getMapStaticImage should return")
 
         sut.getMapStaticImage(
             options: GetMapStaticImageOptions(layer: .basic, style: .dark, zoom: anyZoom(), boundingBox: anyBounds())
@@ -103,7 +103,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getMapAttribution_shouldReturnAttribution() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getMapAttribution should return")
 
         sut.getMapAttribution(tilesetId: .microsoftBaseDarkgrey, zoom: anyZoom(), bounds: anyBounds()) { [self] result, _ in
             assertSuccessfulResult(result) { mapAttribution in
@@ -118,7 +118,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getMapTileset_shouldReturnMapTileset() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getMapTileset should return")
 
         sut.getMapTileset(tilesetId: .microsoftBaseDarkgrey) { [self] result, _ in
             assertSuccessfulResult(result) { mapTileset in
@@ -135,7 +135,7 @@ final class AzureMapsRenderTests: XCTestCase {
         throw XCTSkip("Remove skipping as soon as tested with a proper stateset id")
 
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getMapStateTile should return")
 
         sut.getMapStateTile(statesetId: "PUT_YOUR_STATESET_ID_HERE", tileIndex: anyTileIndex()) { [self] result, response in
             assertSuccessfulResult(result)
@@ -149,7 +149,7 @@ final class AzureMapsRenderTests: XCTestCase {
 
     func test_getMapTileV2_shouldReturnImage() {
         let sut = makeSUT()
-        let expectation = expectation(description: "should return")
+        let expectation = expectation(description: "getMapTileV2 should return")
 
         sut.getMapTileV2(
             tilesetId: .microsoftBaseDarkgrey,
