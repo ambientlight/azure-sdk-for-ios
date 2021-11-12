@@ -16,31 +16,31 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetTrafficIncidentDetail` operation.
-internal struct GetTrafficIncidentDetailOptions: RequestOptions {
+public struct GetTrafficIncidentDetailOptions: RequestOptions {
     /// [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.
     /// Please refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.
-    internal let language: String?
+    public let language: String?
     /// The projection used to specify the coordinates in the request and response. [EPSG900913](http://docs.openlayers.org/library/spherical_mercator.html) (default) or [EPSG4326](http://spatialreference.org/ref/epsg/4326/)
-    internal let projection: ProjectionStandard?
+    public let projection: ProjectionStandard?
     /// The type of vector geometry added to incidents (returned in the <v> element of the response).
-    internal let geometries: IncidentGeometryType?
+    public let geometries: IncidentGeometryType?
     /// Boolean to indicate whether to list all traffic incidents in a cluster separately
-    internal let expandCluster: Bool?
+    public let expandCluster: Bool?
     /// Boolean on whether to return the original position of the incident (<op>) as well as the one shifted to the beginning of the traffic tube (<op>)
-    internal let originalPosition: Bool?
+    public let originalPosition: Bool?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetTrafficIncidentDetailOptions` structure.
     /// - Parameters:
@@ -54,7 +54,7 @@ internal struct GetTrafficIncidentDetailOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         language: String? = nil,
         projection: ProjectionStandard? = nil,
         geometries: IncidentGeometryType? = nil,

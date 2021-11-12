@@ -16,22 +16,22 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetTrafficIncidentViewport` operation.
-internal struct GetTrafficIncidentViewportOptions: RequestOptions {
+public struct GetTrafficIncidentViewportOptions: RequestOptions {
     /// Determines what copyright information to return. When true the copyright text is returned; when false only the copyright index is returned.
-    internal let copyright: Bool?
+    public let copyright: Bool?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetTrafficIncidentViewportOptions` structure.
     /// - Parameters:
@@ -40,7 +40,7 @@ internal struct GetTrafficIncidentViewportOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         copyright: Bool? = nil,
         clientRequestId: String? = nil,
         cancellationToken: CancellationToken? = nil,

@@ -34,23 +34,70 @@ public class TrafficClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: TrafficClientOptions
-    ) throws {
-        self.service = try TrafficClientInternal(
-            url: nil,
+        options: TrafficClientOptions = TrafficClientOptions()
+    ) {
+        service = try! TrafficClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).traffic
     }
+
+    public func getTrafficFlowSegment(
+        style: TrafficFlowSegmentStyle,
+        zoom: Int32,
+        coordinates: [Double],
+        format: ResponseFormat = .json,
+        options: GetTrafficFlowSegmentOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<TrafficFlowSegmentData>
+    ) {
+        service.getTrafficFlowSegment(format: format, style: style, zoom: zoom, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getTrafficFlowTile(
+        style: TrafficFlowTileStyle,
+        zoom: Int32,
+        tileIndex: TileIndex,
+        format: TileFormat = .png,
+        options: GetTrafficFlowTileOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        service.getTrafficFlowTile(format: format, style: style, zoom: zoom, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getTrafficIncidentDetail(
+        style: IncidentDetailStyle,
+        zoom: Int32,
+        boundingBox: [Double],
+        boundingZoom: Int32,
+        trafficModelId: String,
+        format: ResponseFormat = .json,
+        options: GetTrafficIncidentDetailOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<TrafficIncidentDetail>
+    ) {
+        service.getTrafficIncidentDetail(format: format, style: style, boundingbox: boundingBox, boundingZoom: boundingZoom, trafficmodelid: trafficModelId, withOptions: options, completionHandler: completionHandler)
+    }
     
     public func getTrafficIncidentTile(
-        format: TileFormat,
         style: TrafficIncidentTileStyle,
         zoom: Int32,
         tileIndex: TileIndex,
-        withOptions options: GetTrafficIncidentTileOptions? = nil,
+        format: TileFormat = .png,
+        options: GetTrafficIncidentTileOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
-    ){
-        self.service.getTrafficIncidentTile(format: format, style: style, zoom: zoom, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+    ) {
+        service.getTrafficIncidentTile(format: format, style: style, zoom: zoom, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getTrafficIncidentViewport(
+        boundingBox: [Double],
+        boundingZoom: Int32,
+        overviewBox: [Double],
+        overviewZoom: Int32,
+        format: ResponseFormat = .json,
+        options: GetTrafficIncidentViewportOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<TrafficIncidentViewport>
+    ) {
+        service.getTrafficIncidentViewport(format: format, boundingbox: boundingBox, boundingzoom: boundingZoom, overviewbox: overviewBox, overviewzoom: overviewZoom, withOptions: options, completionHandler: completionHandler)
     }
 }
