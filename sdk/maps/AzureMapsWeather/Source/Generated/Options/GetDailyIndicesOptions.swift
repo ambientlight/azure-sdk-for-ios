@@ -16,33 +16,33 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetDailyIndices` operation.
-internal struct GetDailyIndicesOptions: RequestOptions {
+public struct GetDailyIndicesOptions: RequestOptions {
     /// Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.
     /// Please refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.
-    internal let language: String?
+    public let language: String?
     /// Specifies for how many days the daily indices are returned. By default, the indices data for the current day will be returned. When requesting future indices data, the current day is included in the response as day 1. Available values are
     ///   * `1` - Return daily index data for the current day. Default value.
     ///   * `5` - Return 5 days of daily index data starting from the current day.
     ///   * `10` - Return 10 days of daily index data starting from the current day.
     ///   * `15` - Return 15 days of daily index data starting from the current day.
-    internal let duration: Int32?
+    public let duration: Int32?
     /// Numeric index identifier that can be used for restricting returned results to the corresponding index type. Cannot be paired with `indexGroupId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported indices.
-    internal let indexId: Int32?
+    public let indexId: Int32?
     /// Numeric index group identifier that can be used for restricting returned results to the corresponding subset of indices (index group). Cannot be paired with `indexId`. Please refer to [Weather Service Concepts](https://aka.ms/AzureMapsWeatherConcepts) for details and to see the supported index groups.
-    internal let indexGroupId: Int32?
+    public let indexGroupId: Int32?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetDailyIndicesOptions` structure.
     /// - Parameters:
@@ -59,7 +59,7 @@ internal struct GetDailyIndicesOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         language: String? = nil,
         duration: Int32? = nil,
         indexId: Int32? = nil,
