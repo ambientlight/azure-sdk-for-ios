@@ -34,10 +34,10 @@ public class WeatherClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: WeatherClientOptions
-    ) throws {
-        self.service = try WeatherClientInternal(
-            url: nil,
+        options: WeatherClientOptions = WeatherClientOptions()
+    ) {
+        service = try! WeatherClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).weather
@@ -45,9 +45,73 @@ public class WeatherClient {
     
     public func getCurrentConditions(
         coordinates: [Double],
-        withOptions options: GetCurrentConditionsOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetCurrentConditionsOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<CurrentConditionsResponse>
     ) {
-        self.service.getCurrentConditions(format: .json, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+        service.getCurrentConditions(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getDailyForecast(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetDailyForecastOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<DailyForecastResponse>
+    ) {
+        service.getDailyForecast(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getDailyIndices(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetDailyIndicesOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<DailyIndicesResponse>
+    ) {
+        service.getDailyIndices(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getHourlyForecast(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetHourlyForecastOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<HourlyForecastResponse>
+    ) {
+        service.getHourlyForecast(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getMinuteForecast(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetMinuteForecastOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<MinuteForecastResponse>
+    ) {
+        service.getMinuteForecast(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getQuarterDayForecast(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetQuarterDayForecastOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<QuarterDayForecastResponse>
+    ) {
+        service.getQuarterDayForecast(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getSevereWeatherAlerts(
+        coordinates: [Double],
+        format: JsonFormat = .json,
+        options: GetSevereWeatherAlertsOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SevereWeatherAlertsResponse>
+    ) {
+        service.getSevereWeatherAlerts(format: format, coordinates: coordinates, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getWeatherAlongRoute(
+        query: String,
+        format: JsonFormat = .json,
+        options: GetWeatherAlongRouteOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<WeatherAlongRouteResponse>
+    ) {
+        service.getWeatherAlongRoute(format: format, query: query, withOptions: options, completionHandler: completionHandler)
     }
 }

@@ -16,9 +16,9 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetHourlyForecast` operation.
-internal struct GetHourlyForecastOptions: RequestOptions {
+public struct GetHourlyForecastOptions: RequestOptions {
     /// Specifies to return the data in either metric units or imperial units. Default value is metric.
-    internal let unit: WeatherDataUnit?
+    public let unit: WeatherDataUnit?
     /// Time frame of the returned weather forecast. By default, the forecast data for next hour will be returned. Available values are
     ///   * `1` - Return forecast data for the next hour. Default value.
     ///   * `12` - Return hourly forecast for next 12 hours.
@@ -26,23 +26,23 @@ internal struct GetHourlyForecastOptions: RequestOptions {
     ///   * `72` - Return hourly forecast for next 72 hours (3 days).
     ///   * `120` - Return hourly forecast for next 120 hours (5 days). Only available in S1 SKU.
     ///   * `240` - Return hourly forecast for next 240 hours (10 days). Only available in S1 SKU.
-    internal let duration: Int32?
+    public let duration: Int32?
     /// Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.
     /// Please refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.
-    internal let language: String?
+    public let language: String?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetHourlyForecastOptions` structure.
     /// - Parameters:
@@ -60,7 +60,7 @@ internal struct GetHourlyForecastOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         unit: WeatherDataUnit? = nil,
         duration: Int32? = nil,
         language: String? = nil,

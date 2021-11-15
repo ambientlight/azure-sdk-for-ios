@@ -16,27 +16,27 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetSevereWeatherAlerts` operation.
-internal struct GetSevereWeatherAlertsOptions: RequestOptions {
+public struct GetSevereWeatherAlertsOptions: RequestOptions {
     /// Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.
     /// Please refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.
-    internal let language: String?
+    public let language: String?
     /// Return full details for the severe weather alerts. Available values are
     ///   * `true` - Returns full details. By default all details are returned.
     ///   * `false` - Returns a truncated version of the alerts data, which excludes the area-specific full description of alert details (`alertDetails`).
-    internal let details: String?
+    public let details: String?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetSevereWeatherAlertsOptions` structure.
     /// - Parameters:
@@ -49,7 +49,7 @@ internal struct GetSevereWeatherAlertsOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         language: String? = nil,
         details: String? = nil,
         clientRequestId: String? = nil,

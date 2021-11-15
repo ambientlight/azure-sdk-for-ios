@@ -16,28 +16,28 @@ import Foundation
 // swiftlint:disable line_length
 
 /// User-configurable options for the `GetMinuteForecast` operation.
-internal struct GetMinuteForecastOptions: RequestOptions {
+public struct GetMinuteForecastOptions: RequestOptions {
     /// Specifies time interval in minutes for the returned weather forecast. Supported values are
     ///   * `1` -  Retrieve forecast for 1-minute intervals. Returned by default.
     ///   * `5` - Retrieve forecasts for 5-minute intervals.
     ///   * `15` - Retrieve forecasts for 15-minute intervals.
-    internal let interval: Int32?
+    public let interval: Int32?
     /// Language in which search results should be returned. Should be one of supported IETF language tags, case insensitive. When data in specified language is not available for a specific field, default language is used.
     /// Please refer to [Supported Languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.
-    internal let language: String?
+    public let language: String?
 
     /// A client-generated, opaque value with 1KB character limit that is recorded in analytics logs.
     /// Highly recommended for correlating client-side activites with requests received by the server.
-    internal let clientRequestId: String?
+    public let clientRequestId: String?
 
     /// A token used to make a best-effort attempt at canceling a request.
-    internal let cancellationToken: CancellationToken?
+    public let cancellationToken: CancellationToken?
 
     /// A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
-    internal var dispatchQueue: DispatchQueue?
+    public var dispatchQueue: DispatchQueue?
 
     /// A `PipelineContext` object to associate with the request.
-    internal var context: PipelineContext?
+    public var context: PipelineContext?
 
     /// Initialize a `GetMinuteForecastOptions` structure.
     /// - Parameters:
@@ -51,7 +51,7 @@ internal struct GetMinuteForecastOptions: RequestOptions {
     ///   - cancellationToken: A token used to make a best-effort attempt at canceling a request.
     ///   - dispatchQueue: A dispatch queue on which to call the completion handler. Defaults to `DispatchQueue.main`.
     ///   - context: A `PipelineContext` object to associate with the request.
-    internal init(
+    public init(
         interval: Int32? = nil,
         language: String? = nil,
         clientRequestId: String? = nil,
