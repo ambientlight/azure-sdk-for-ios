@@ -45,7 +45,7 @@ internal final class Elevation {
         // Create request parameters
         let params = RequestParameters(
             (.path, "format", format, .encode),
-            (.query, "points", points.map { $0 }.joined(separator: "|"), .skipEncoding),
+            (.query, "points", points.map { $0 }.joined(separator: "|"), .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "x-ms-client-id", client.clientId, .encode),
             (.query, "api-version", client.options.apiVersion, .encode),
@@ -236,7 +236,7 @@ internal final class Elevation {
         // Create request parameters
         let params = RequestParameters(
             (.path, "format", format, .encode),
-            (.query, "lines", lines.map { $0 }.joined(separator: "|"), .skipEncoding),
+            (.query, "lines", lines.map { $0 }.joined(separator: "|"), .encode),
             (.query, "samples", options?.samples, .encode),
             (.uri, "$host", client.endpoint.absoluteString, .skipEncoding),
             (.header, "x-ms-client-id", client.clientId, .encode),
