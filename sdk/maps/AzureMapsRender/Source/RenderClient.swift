@@ -34,22 +34,91 @@ public class RenderClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: RenderClientOptions
-    ) throws {
-        self.service = try RenderClientInternal(
-            url: nil,
+        options: RenderClientOptions = RenderClientOptions()
+    ) {
+        service = try! RenderClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).render
     }
-    
-    public func getMapTile(
-        tilesetId: TilesetID,
+
+    public func getCopyrightCaption(
+        format:  ResponseFormat = .json,
+        options: GetCopyrightCaptionOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<CopyrightCaption>
+    ) {
+        service.getCopyrightCaption(format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getCopyrightForTile(
         tileIndex: TileIndex,
-        withOptions options: GetMapTileV2Options? = nil,
+        format:  ResponseFormat = .json,
+        options: GetCopyrightForTileOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Copyright>
+    ) {
+        service.getCopyrightForTile(format: format, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getCopyrightForWorld(
+        format:  ResponseFormat = .json,
+        options: GetCopyrightForWorldOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Copyright>
+    ) {
+        service.getCopyrightForWorld(format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getCopyrightFromBoundingBox(
+        boundingBox: BoundingBox,
+        format:  ResponseFormat = .json,
+        options: GetCopyrightFromBoundingBoxOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Copyright>
+    ) {
+        service.getCopyrightFromBoundingBox(format: format, boundingBox: boundingBox, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getMapStaticImage(
+        format:  RasterTileFormat = .png,
+        options: GetMapStaticImageOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<Void>
     ) {
-        self.service.getMapTileV2(tilesetId: tilesetId, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+        service.getMapStaticImage(format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getMapAttribution(
+        tilesetId: TilesetID,
+        zoom: Int32,
+        bounds: [Double],
+        options: GetMapAttributionOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<MapAttribution>
+    ) {
+        service.getMapAttribution(tilesetId: tilesetId, zoom: zoom, bounds: bounds, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getMapTileset(
+        tilesetId: TilesetID,
+        options: GetMapTilesetOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<MapTileset>
+    ) {
+        service.getMapTileset(tilesetId: tilesetId, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getMapStateTile(
+        statesetId: String,
+        tileIndex: TileIndex,
+        options: GetMapStateTileOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        service.getMapStateTile(statesetId: statesetId, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
+    }
+    
+    public func getMapTileV2(
+        tilesetId: TilesetID,
+        tileIndex: TileIndex,
+        options: GetMapTileV2Options? = nil,
+        completionHandler: @escaping HTTPResultHandler<Void>
+    ) {
+        service.getMapTileV2(tilesetId: tilesetId, tileIndex: tileIndex, withOptions: options, completionHandler: completionHandler)
     }
 }
 
