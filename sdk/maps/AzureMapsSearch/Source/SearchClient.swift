@@ -34,10 +34,10 @@ public class SearchClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: SearchClientOptions
-    ) throws {
-        self.service = try SearchClientInternal(
-            url: nil,
+        options: SearchClientOptions = SearchClientOptions()
+    ) {
+        service = try! SearchClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).search
@@ -45,20 +45,143 @@ public class SearchClient {
     
     public func fuzzySearch(
         query: String,
-        withOptions options: FuzzySearchOptions? = nil,
+        format: ResponseFormat = .json,
+        options: FuzzySearchOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
     ) {
-        self.service.fuzzySearch(format: .json, query: query, withOptions: options, completionHandler: completionHandler)
+        service.fuzzySearch(format: format, query: query, withOptions: options, completionHandler: completionHandler)
     }
     
     
     
-    public func fuzzy(
-        searchBatch: BatchRequest,
-        withOptions options: FuzzySearchBatchOptions? = nil
+    public func fuzzySearchBatch(
+        request: BatchRequest,
+        format: JsonFormat = .json,
+        options: FuzzySearchBatchOptions? = nil
     ) -> LROPoller<SearchAddressBatchProcessResult, FuzzySearchBatchOptions> {
-        return LROPoller(client: self.service.client, withOptions: options) { (completionHandler: @escaping HTTPResultHandler<SearchAddressBatchProcessResult?>) in
-            self.service.fuzzy(searchBatch: searchBatch, format: .json, withOptions: options, completionHandler: completionHandler)
+        LROPoller(client: service.client, withOptions: options) { [self] (completionHandler: @escaping HTTPResultHandler<SearchAddressBatchProcessResult?>) in
+            service.fuzzy(searchBatch: request, format: format, withOptions: options, completionHandler: completionHandler)
         }
+    }
+
+    public func searchAddress(
+        query: String,
+        format: ResponseFormat = .json,
+        options: SearchAddressOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.searchAddress(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchAddressBatch(
+        request: BatchRequest,
+        format: JsonFormat = .json,
+        options: SearchAddressBatchOptions? = nil
+    ) -> LROPoller<SearchAddressBatchProcessResult, SearchAddressBatchOptions> {
+        LROPoller(client: service.client, withOptions: options) { [self] completionHandler in
+            service.search(addressBatch: request, format: format, withOptions: options, completionHandler: completionHandler)
+        }
+    }
+
+    public func reverseSearchAddress(
+        query: [Double],
+        format: ResponseFormat = .json,
+        options: ReverseSearchAddressOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ReverseSearchAddressResult>
+    ) {
+        service.reverseSearchAddress(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func reverseSearchAddressBatch(
+        request: BatchRequest,
+        format: JsonFormat = .json,
+        options: ReverseSearchAddressBatchOptions? = nil
+    ) -> LROPoller<ReverseSearchAddressBatchProcessResult, ReverseSearchAddressBatchOptions> {
+        LROPoller(client: service.client, withOptions: options) { [self] completionHandler in
+            service.reverse(searchAddressBatch: request, format: format, withOptions: options, completionHandler: completionHandler)
+        }
+    }
+
+    public func reverseSearchCrossStreetAddress(
+        query: [Double],
+        format: ResponseFormat = .json,
+        options: ReverseSearchCrossStreetAddressOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<ReverseSearchCrossStreetAddressResult>
+    ) {
+        service.reverseSearchCrossStreetAddress(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchStructuredAddress(
+        format: ResponseFormat = .json,
+        options: SearchStructuredAddressOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.searchStructuredAddress(format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchNearbyPointOfInterest(
+        lat: Double,
+        lon: Double,
+        format: ResponseFormat = .json,
+        options: SearchNearbyPointOfInterestOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.searchNearbyPointOfInterest(format: format, lat: lat, lon: lon, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchPointOfInterest(
+        query: String,
+        format: ResponseFormat = .json,
+        options: SearchPointOfInterestOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.searchPointOfInterest(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchPointOfInterestCategory(
+        query: String,
+        format: ResponseFormat = .json,
+        options: SearchPointOfInterestCategoryOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.searchPointOfInterestCategory(format: format, query: query, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getPointOfInterestCategoryTree(
+        format: JsonFormat = .json,
+        options: GetPointOfInterestCategoryTreeOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<PointOfInterestCategoryTreeResult>
+    ) {
+        service.getPointOfInterestCategoryTree(format: format, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func getPolygon(
+        geometryIds: [String],
+        format: JsonFormat = .json,
+        options: GetPolygonOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<PolygonResult>
+    ) {
+        service.getPolygon(format: format, geometryIds: geometryIds, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchAlongRoute(
+        request: SearchAlongRouteRequest,
+        query: String,
+        maxDetourTime: Int32,
+        format: ResponseFormat = .json,
+        options: SearchAlongRouteOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.search(alongRoute: request, format: format, query: query, maxDetourTime: maxDetourTime, withOptions: options, completionHandler: completionHandler)
+    }
+
+    public func searchInsideGeometry(
+        request: SearchInsideGeometryRequest,
+        query: String,
+        format: ResponseFormat = .json,
+        options: SearchInsideGeometryOptions? = nil,
+        completionHandler: @escaping HTTPResultHandler<SearchAddressResult>
+    ) {
+        service.search(insideGeometry: request, format: format, query: query, withOptions: options, completionHandler: completionHandler)
     }
 }
