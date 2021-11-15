@@ -34,10 +34,10 @@ public class GeolocationClient {
     public init(
         endpoint: URL? = nil,
         credential: TokenCredential,
-        withOptions options: GeolocationClientOptions
-    ) throws {
-        self.service = try GeolocationClientInternal(
-            url: nil,
+        options: GeolocationClientOptions = GeolocationClientOptions()
+    ) {
+        service = try! GeolocationClientInternal(
+            url: endpoint,
             authPolicy: SharedTokenCredentialPolicy(credential: credential, scopes: []),
             withOptions: options
         ).geolocation
@@ -45,9 +45,10 @@ public class GeolocationClient {
     
     public func getLocation(
         ipAddress: String,
-        withOptions options: GetLocationOptions? = nil,
+        format: JsonFormat = .json,
+        options: GetLocationOptions? = nil,
         completionHandler: @escaping HTTPResultHandler<IpAddressToLocationResult>
     ){
-        self.service.getLocation(format: JsonFormat.json, ipAddress: ipAddress, withOptions: options, completionHandler: completionHandler)
+        service.getLocation(format: format, ipAddress: ipAddress, withOptions: options, completionHandler: completionHandler)
     }
 }
